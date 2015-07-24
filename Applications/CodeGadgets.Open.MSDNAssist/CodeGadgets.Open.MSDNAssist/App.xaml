@@ -1,0 +1,16 @@
+﻿<Application x:Class="CodeGadgets.Open.MSDNAssist.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:view="clr-namespace:CodeGadgets.Open.MSDNAssist.View"
+             Startup="Application_Startup" SessionEnding="Application_SessionEnding" Exit="Application_Exit">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/CodeGadgets.Framework;component/Assets/Xaml/GATheme.xaml" />
+        <ResourceDictionary>
+          <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

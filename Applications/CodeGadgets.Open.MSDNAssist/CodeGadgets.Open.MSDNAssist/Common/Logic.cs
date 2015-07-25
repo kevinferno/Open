@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeGadgets.Framework.Persistence;
+using CodeGadgets.Framework.Utility;
 using CodeGadgets.Framework.Xml;
 using CodeGadgets.Open.MSDNAssist.Model;
 
@@ -27,8 +28,8 @@ namespace CodeGadgets.Open.MSDNAssist
 		public void Initialize()
 		{
 			Initialize_CoreData();
-			Initiailze_Tools();
 			Initialize_UserData();
+			Initiailze_Tools();
 		}
 
 
@@ -36,22 +37,24 @@ namespace CodeGadgets.Open.MSDNAssist
 		{
 			Data.UserDataFilePath = SaveFileNameGenerator.FormatForLocalApplicationData(MSDNAssist.CompanyName, MSDNAssist.MainWindowTitle, System.Reflection.Assembly.GetEntryAssembly().Location, "userDataXml");
 		}
-		private void Initiailze_Tools()
-		{
-			Data.UserDataSaveFile = new UserDataSaveFile();
-			Data.UserDataSaveFile.FilePath = Data.UserDataFilePath;
-		}
 
 		private void Initialize_UserData()
 		{
+			Data.UserDataSaveFile = new UserDataSaveFile();
+			Data.UserDataSaveFile.FilePath = Data.UserDataFilePath;
 			// Load User Data From File
 			Data.UserData = Data.UserDataSaveFile.Load();
 			// If UserData is null for whatever reason, just assign a new one
 			if (Data.UserData == null) Data.UserData = new UserData();
 		}
+		private void Initiailze_Tools()
+		{
+			// AutoSave
+			Data.AutoSaveProcessor = new BackgroundMaintenanceProcessor(() => Data.UserDataSaveFile.Save(Data.UserData), MSDNAssist.AUTOSAVE_INTERVAL_MS, MSDNAssist.AUTOSAVE_INITIALDELAY_MS);
+		}
 		#endregion
 		#region Termination
-		public	 void Terminate()
+		public void Terminate()
 		{
 			SaveUserData();
 		}

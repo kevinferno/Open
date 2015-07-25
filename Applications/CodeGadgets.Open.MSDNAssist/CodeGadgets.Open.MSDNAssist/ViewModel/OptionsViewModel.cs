@@ -11,6 +11,16 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 {
 	public class OptionsViewModel : ViewModelBase
 	{
+		public bool? DialogResult
+		{
+			get { return _DialogResult; }
+			set
+			{
+				if (_DialogResult == value) return;
+				_DialogResult = value;
+				OnPropertyChanged(nameof(DialogResult));
+			}
+		}
 
 
 		public OptionsViewModel(OptionsView view)
@@ -20,7 +30,7 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 		}
 
 
-
+		private bool? _DialogResult;
 		private OptionsView View;
 	}
 }

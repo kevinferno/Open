@@ -14,7 +14,10 @@ namespace CodeGadgets.Open.MSDNAssist
 	{
 		public override IEnumerable<Type> GetKnownTypes()
 		{
-			return base.GetKnownTypes();
+			return new List<Type>
+			{
+				typeof(MonitoredFolder)
+			};
 		}
 
 		protected override bool SaveExecute(UserData data)

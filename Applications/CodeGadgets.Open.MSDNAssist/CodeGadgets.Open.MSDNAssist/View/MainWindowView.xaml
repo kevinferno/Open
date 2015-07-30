@@ -10,14 +10,14 @@
 				Width="1280" Height="720"
 				Foreground="White" Background="Black"
 			  cg:DialogResultWindowClose.DialogResult="{Binding DialogResult}"
-        Title="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}">
+        Title="{Binding Path=WindowTitle, UpdateSourceTrigger=PropertyChanged}">
   <Grid>
     <Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
 		</Grid.RowDefinitions>
     <DockPanel>
-      <Button DockPanel.Dock="Right" Padding="8" Margin="4" Command="{Binding ShowOptionsCommand}">Options</Button>
+      <Button DockPanel.Dock="Right" Padding="8" Margin="4" Command="{Binding ShowOptionsCommand}" FontSize="{StaticResource FontSize_Button_Medium}" >Options</Button>
       <TextBlock FontSize="{StaticResource FontSize_Title}" Margin="16, 4">MSDN Assist</TextBlock>
 		</DockPanel>
   </Grid>

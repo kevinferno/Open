@@ -1,0 +1,34 @@
+﻿<UserControl   x:Name="_MonitoredFolderViewUserControl" x:Class="CodeGadgets.Open.MSDNAssist.View.MonitoredFolderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeGadgets.Open.MSDNAssist.View"
+						 xmlns:cg="clr-namespace:CodeGadgets.Framework.ModelViewViewModel;assembly=CodeGadgets.Framework"
+						 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+						 xmlns:cgc="clr-namespace:CodeGadgets.Framework.WPF.Controls;assembly=CodeGadgets.Framework"
+						 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="24" d:DesignWidth="300">
+  <i:Interaction.Triggers>
+    <i:EventTrigger EventName="Loaded">
+      <cg:EventToCommand Command="{Binding Path=DataContext.SetTextBoxFocusCommand, ElementName=_MonitoredFolderViewUserControl}" 
+																 EventArgs="{Binding Path=EventArgs, RelativeSource={RelativeSource Self}}"
+																 />
+    </i:EventTrigger>
+  </i:Interaction.Triggers>
+  <DockPanel>
+    <cgc:MultiStepButton DockPanel.Dock="Right" Command="{Binding DeleteCommand}" FontSize="{StaticResource FontSize_Button_Small}"
+												 Padding="8,2" Margin="4,0,0,0">
+      <cgc:MultiStepButton.Steps>
+        <sys:String>Delete</sys:String>
+        <sys:String>Confirm?</sys:String>
+			</cgc:MultiStepButton.Steps>
+		</cgc:MultiStepButton>
+    <Button DockPanel.Dock="Right" Content="…" Padding="4,2" Command="{Binding ShowFolderBrowserCommand}" />
+    <TextBox Text="{Binding FolderName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+						 Style="{StaticResource TextBoxError}" FontFamily="{StaticResource FontFamily_MonoSpace}"
+						 cg:TextBoxAttach.TextBoxController="{Binding}"
+						 Margin="0,0,4,0"/>
+  </DockPanel>
+</UserControl>

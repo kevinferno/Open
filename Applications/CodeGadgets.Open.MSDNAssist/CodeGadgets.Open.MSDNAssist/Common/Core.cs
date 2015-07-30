@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeGadgets.Framework.Utility;
+using CodeGadgets.Open.Framework.MVVM;
 using CodeGadgets.Open.MSDNAssist.Model;
 
 namespace CodeGadgets.Open.MSDNAssist
@@ -21,14 +22,9 @@ namespace CodeGadgets.Open.MSDNAssist
 		}
 		public static Logic Logic { get { return Logic.Do; } }
 
-		public List<string> MonitoredFolders
-		{
-			get { return (this._MonitoredFolders) ?? (this._MonitoredFolders = new List<string>()); }
-		}
 		public string UserDataFilePath { get; set; }
 		public UserData UserData { get; set; }
 		public UserDataSaveFile UserDataSaveFile { get; set; }
 		public BackgroundMaintenanceProcessor AutoSaveProcessor { get; set; }
-		private List<string> _MonitoredFolders;
 	}
 }

@@ -25,10 +25,20 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 				OnPropertyChanged(nameof(DialogResult));
 			}
 		}
+		public string WindowTitle
+		{
+			get { return this._WindowTitle; }
+			set
+			{
+				if (this._WindowTitle == value) return;
+				this._WindowTitle = value;
+				this.OnPropertyChanged(nameof(WindowTitle));
+			}
+		}
 
 		public MainWindowViewModel(MainWindowView view)
 		{
-			this.Name = MSDNAssist.MainWindowTitle;
+			this.WindowTitle = MSDNAssist.MainWindowTitle;
 			this.MW = view;
 		}
 
@@ -36,13 +46,19 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 		{
 			var ov = new OptionsView();
 			var ovm = new OptionsViewModel(ov);
+			Logic.Do.Options_InitializeMonitoredFolders(ovm);
 			ov.DataContext = ovm;
-			ov.ShowDialog();
+			ov.Owner = MW;
+			var res = ov.ShowDialog();
+			if (res.HasValue && res.Value)
+			{
+				Logic.Do.Options_UpdateMonitoredFolders(ovm);
+				Logic.Do.SaveUserData();
+			}
 		}
 
-
-
 		private MainWindowView MW;
+		private string _WindowTitle;
 		private bool? _DialogResult;
 		private ICommand _ShowOptionsCommand;
 	}

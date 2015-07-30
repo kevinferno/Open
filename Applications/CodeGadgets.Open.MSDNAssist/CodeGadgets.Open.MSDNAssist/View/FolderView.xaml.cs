@@ -15,12 +15,9 @@ using System.Windows.Shapes;
 
 namespace CodeGadgets.Open.MSDNAssist.View
 {
-	/// <summary>
-	/// Interaction logic for MonitoredFolderView.xaml
-	/// </summary>
-	public partial class MonitoredFolderView : UserControl
+	public partial class FolderView : UserControl
 	{
-		public MonitoredFolderView()
+		public FolderView()
 		{
 			InitializeComponent();
 		}

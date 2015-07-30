@@ -7,11 +7,13 @@ namespace CodeGadgets.Open.MSDNAssist.Model
 	public class UserData
 	{
 		[DataMember]
-		public List<MonitoredFolder> MonitoredFolders
+		public List<Folder> MonitoredFolders
 		{
-			get { return (this._MonitoredFolders) ?? (this._MonitoredFolders = new List<MonitoredFolder>()); }
+			get { return (this._MonitoredFolders) ?? (this._MonitoredFolders = new List<Folder>()); }
 		}
+		[DataMember]
+		public string DestinationFolder { get; set; }
 
-		private List<MonitoredFolder> _MonitoredFolders;
+		private List<Folder> _MonitoredFolders;
 	}
 }

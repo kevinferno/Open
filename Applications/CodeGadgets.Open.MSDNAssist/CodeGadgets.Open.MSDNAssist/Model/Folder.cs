@@ -9,7 +9,7 @@ using CodeGadgets.Open.Framework.MVVM;
 namespace CodeGadgets.Open.MSDNAssist.Model
 {
 	[DebuggerDisplay("{FolderName}")]
-	public class MonitoredFolder
+	public class Folder
 	{
 		public string FolderName { get; set; }
 	}

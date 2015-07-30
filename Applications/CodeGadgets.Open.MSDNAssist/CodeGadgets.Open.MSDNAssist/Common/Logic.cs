@@ -69,25 +69,29 @@ namespace CodeGadgets.Open.MSDNAssist
 		}
 		#endregion
 		#region Options
-		public void Options_InitializeMonitoredFolders(OptionsViewModel ovm)
+		public void Options_Initialize(OptionsViewModel ovm)
 		{
+			// Monitored Folders
 			ovm.MonitoredFolders.Clear();
 			foreach (var folder in Core.Data.UserData.MonitoredFolders)
 			{
-				var vm = new MonitoredFolderViewModel()
+				var vm = new FolderViewModel()
 				{
 					Data = folder,
-					UpdateMonitoredFolders = () => Options_InitializeMonitoredFolders(ovm)
+					IsVisible_DeleteButton = true,
+					UpdateMonitoredFolders = () => Options_Initialize(ovm)
 				};
 				ovm.MonitoredFolders.Add(vm);
 			}
+			// Destination Folder
+			ovm.DestinationFolder = new FolderViewModel() { Data = new Folder() { FolderName = Core.Data.UserData.DestinationFolder } };
 		}
 		internal void Options_AddNewMonitoredFolder(OptionsViewModel ovm)
 		{
-			var vm = new MonitoredFolderViewModel()
+			var vm = new FolderViewModel()
 			{
-				Data = new MonitoredFolder(),
-				UpdateMonitoredFolders = () => Options_InitializeMonitoredFolders(ovm)
+				Data = new Folder(),
+				UpdateMonitoredFolders = () => Options_Initialize(ovm)
 			};
 			ovm.MonitoredFolders.Add(vm);
 		}
@@ -100,7 +104,11 @@ namespace CodeGadgets.Open.MSDNAssist
 			var addedFolders = ovm.MonitoredFolders.Where(src => !Core.Data.UserData.MonitoredFolders.Any(dat => dat.FolderName.Trim().ToLower() == src.FolderName.Trim().ToLower())).ToList();
 			foreach (var af in addedFolders) Core.Data.UserData.MonitoredFolders.Add(af.Data);
 		}
-		internal void Options_DeleteMonitoredFolder(MonitoredFolderViewModel vm)
+		internal void Options_UpdateData(OptionsViewModel ovm)
+		{
+			Core.Data.UserData.DestinationFolder = ovm.DestinationFolder?.Data?.FolderName;
+		}
+		internal void Options_DeleteMonitoredFolder(FolderViewModel vm)
 		{
 			var data = vm.Data;
 			if (!Data.UserData.MonitoredFolders.Contains(data)) return;

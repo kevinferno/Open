@@ -46,13 +46,14 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 		{
 			var ov = new OptionsView();
 			var ovm = new OptionsViewModel(ov);
-			Logic.Do.Options_InitializeMonitoredFolders(ovm);
+			Logic.Do.Options_Initialize(ovm);
 			ov.DataContext = ovm;
 			ov.Owner = MW;
 			var res = ov.ShowDialog();
 			if (res.HasValue && res.Value)
 			{
 				Logic.Do.Options_UpdateMonitoredFolders(ovm);
+				Logic.Do.Options_UpdateData(ovm);
 				Logic.Do.SaveUserData();
 			}
 		}

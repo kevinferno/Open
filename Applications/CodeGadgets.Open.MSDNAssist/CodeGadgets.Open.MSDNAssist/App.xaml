@@ -10,9 +10,9 @@
         <ResourceDictionary Source="pack://application:,,,/CodeGadgets.Framework;component/Assets/Xaml/GATheme.xaml" />
         <ResourceDictionary>
           <BooleanToVisibilityConverter x:Key="BoolToVis" />
-          <DataTemplate DataType="{x:Type vm:MonitoredFolderViewModel}">
-						<v:MonitoredFolderView />
-					</DataTemplate>
+          <DataTemplate DataType="{x:Type vm:FolderViewModel}">
+            <v:FolderView />
+          </DataTemplate>
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>

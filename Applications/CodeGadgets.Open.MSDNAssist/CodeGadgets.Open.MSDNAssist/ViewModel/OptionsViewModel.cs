@@ -23,11 +23,11 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 				OnPropertyChanged(nameof(DialogResult));
 			}
 		}
-		public ObservableCollection<MonitoredFolderViewModel> MonitoredFolders
+		public ObservableCollection<FolderViewModel> MonitoredFolders
 		{
-			get { return (this._MonitoredFolders) ?? (this._MonitoredFolders = new ObservableCollection<MonitoredFolderViewModel>()); }
+			get { return (this._MonitoredFolders) ?? (this._MonitoredFolders = new ObservableCollection<FolderViewModel>()); }
 		}
-		public MonitoredFolderViewModel SelectedMonitoredFolder
+		public FolderViewModel SelectedMonitoredFolder
 		{
 			get { return this._SelectedMonitoredFolder; }
 			set
@@ -37,6 +37,17 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 				this.OnPropertyChanged(nameof(SelectedMonitoredFolder));
 			}
 		}
+		public FolderViewModel DestinationFolder
+		{
+			get { return this._DestinationFolder; }
+			set
+			{
+				if (this._DestinationFolder == value) return;
+				this._DestinationFolder = value;
+				this.OnPropertyChanged(nameof(DestinationFolder));
+			}
+		}
+
 		public string WindowTitle
 		{
 			get { return this._WindowTitle; }
@@ -75,8 +86,9 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 			this.WindowTitle = MSDNAssist.OptionsWindowTitle;
 		}
 
-		private ObservableCollection<MonitoredFolderViewModel> _MonitoredFolders;
-		private MonitoredFolderViewModel _SelectedMonitoredFolder;
+		private ObservableCollection<FolderViewModel> _MonitoredFolders;
+		private FolderViewModel _SelectedMonitoredFolder;
+		private FolderViewModel _DestinationFolder = new FolderViewModel() { Data = new Folder() };
 		private bool? _DialogResult;
 		private ICommand _CancelCommand;
 		private ICommand _OkCommand;

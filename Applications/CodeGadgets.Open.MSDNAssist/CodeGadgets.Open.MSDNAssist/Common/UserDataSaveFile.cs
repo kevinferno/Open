@@ -16,7 +16,7 @@ namespace CodeGadgets.Open.MSDNAssist
 		{
 			return new List<Type>
 			{
-				typeof(MonitoredFolder)
+				typeof(Folder)
 			};
 		}
 

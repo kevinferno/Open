@@ -12,13 +12,13 @@ using CodeGadgets.Open.MSDNAssist.Model;
 
 namespace CodeGadgets.Open.MSDNAssist.ViewModel
 {
-	public class MonitoredFolderViewModel : ViewModelBase, IDataErrorInfo, CodeGadgets.Framework.ModelViewViewModel.ITextBoxController
+	public class FolderViewModel : ViewModelBase, IDataErrorInfo, CodeGadgets.Framework.ModelViewViewModel.ITextBoxController
 	{
 		public event CodeGadgets.Framework.ModelViewViewModel.SelectAllEventHandler SelectAll;
 		public event CodeGadgets.Framework.ModelViewViewModel.FocusEventHandler Focus;
 		public Action UpdateMonitoredFolders { get; set; }
 
-		public MonitoredFolder Data
+		public Folder Data
 		{
 			get { return this._Data; }
 			set
@@ -49,6 +49,18 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 			}
 		}
 		public void FocusOnTextBox() => Focus?.Invoke(this);
+		public bool IsVisible_DeleteButton
+		{
+			get { return this._IsVisible_DeleteButton; }
+			set
+			{
+				if (this._IsVisible_DeleteButton == value) return;
+				this._IsVisible_DeleteButton = value;
+				this.OnPropertyChanged(nameof(IsVisible_DeleteButton));
+			}
+		}
+
+
 
 		#region Validation Properties
 		public string Error
@@ -57,7 +69,7 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 			{
 				StringBuilder sb = new StringBuilder();
 				if (!string.IsNullOrWhiteSpace(this["FolderName"]))
-					sb.AppendLine(string.Format("Monitored Folder Error: {0}", this["FolderName"]));
+					sb.AppendLine(string.Format("Folder Error: {0}", this["FolderName"]));
 				return sb.ToString().TrimEnd(Environment.NewLine.ToCharArray());
 			}
 		}
@@ -82,10 +94,11 @@ namespace CodeGadgets.Open.MSDNAssist.ViewModel
 			if (fbd.ShowDialog() != DialogResult.OK) return;
 			if (Logic.Do.CheckMonitoredFolder(fbd.SelectedPath)) FolderName = fbd.SelectedPath;
 		}
-		private MonitoredFolder _Data;
+		private Folder _Data;
 		private ICommand _ShowFolderBrowserCommand;
 		private ICommand _SetTextBoxFocusCommand;
 		private ICommand _DeleteCommand;
+		private bool _IsVisible_DeleteButton;
 	}
 
 }

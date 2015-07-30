@@ -7,32 +7,41 @@
 				xmlns:cg="clr-namespace:CodeGadgets.Open.Framework.MVVM;assembly=CodeGadgets.Open.Framework"
         mc:Ignorable="d"
        SnapsToDevicePixels="True"
-				Width="699.701" Height="335.821"
+				Width="640" Height="480"
 				Foreground="White" Background="Black"
 			  cg:DialogResultWindowClose.DialogResult="{Binding DialogResult}"
         Title="{Binding Path=WindowTitle, UpdateSourceTrigger=PropertyChanged}" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
-    <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition />
-      <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <DockPanel Grid.Row="0" Margin="8">
-			<Button DockPanel.Dock="Right" Content="_Add" FontSize="{StaticResource FontSize_Button_Medium}" Padding="16,8" VerticalAlignment="Center"
-							Command="{Binding AddMonitoredFolderCommand}"/>
-      <TextBlock FontSize="{StaticResource FontSize_Title}" Padding="8" Margin="0, 0, 8, 0"
-								 VerticalAlignment="Center" TextWrapping="NoWrap">Monitored Download Folders</TextBlock>
-		</DockPanel>
-    <Border Grid.Row="1" BorderThickness="0" Margin="8, 0">
-			<ListBox ItemsSource="{Binding MonitoredFolders}" SelectedItem="{Binding SelectedMonitoredFolder}"
-							 HorizontalContentAlignment="Stretch"/>
-		</Border>
-    <DockPanel Grid.Row="2" Margin="8" LastChildFill="False">
+  <DockPanel LastChildFill="True">
+    <DockPanel x:Name="_OkCancelDockPanel" DockPanel.Dock="Bottom" Grid.Row="2" Margin="8" LastChildFill="False">
       <Button DockPanel.Dock="Right" Content="_Cancel" FontSize="{StaticResource FontSize_Button_Medium}" Padding="16,8" VerticalAlignment="Center" Margin="8, 0, 0, 0" 
 							Command="{Binding CancelCommand}" IsCancel="True"/>
       <Button DockPanel.Dock="Right" Content="_Ok" FontSize="{StaticResource FontSize_Button_Medium}" Padding="16,8" VerticalAlignment="Center" 
 							Command="{Binding OkCommand}" IsDefault="True"/>
     </DockPanel>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <DockPanel x:Name="_MonitoredHeaderDockPanel" Grid.Row="0"  Margin="8">
+        <Button DockPanel.Dock="Right" Content="_Add" FontSize="{StaticResource FontSize_Button_Medium}" Padding="16,8" VerticalAlignment="Center"
+							Command="{Binding AddMonitoredFolderCommand}"/>
+        <TextBlock FontSize="{StaticResource FontSize_Title}" Padding="8" Margin="0, 0, 8, 0"
+								 VerticalAlignment="Center" TextWrapping="NoWrap">Monitored Download Folders</TextBlock>
+      </DockPanel>
+      <Border x:Name="_MonitoredFoldersBorder" Grid.Row="1" BorderThickness="0" Margin="8, 0">
+        <ListBox ItemsSource="{Binding MonitoredFolders}" SelectedItem="{Binding SelectedMonitoredFolder}"
+							 HorizontalContentAlignment="Stretch"/>
+      </Border>
 
-  </Grid>
+      <StackPanel x:Name="_DestinationFolderDockPanel" Grid.Row="2"  Margin="8">
+        <TextBlock FontSize="{StaticResource FontSize_Title}" Padding="8" Margin="0, 0, 8, 0"
+								 VerticalAlignment="Center" TextWrapping="NoWrap">Destination Folder</TextBlock>
+				<ContentControl Content="{Binding DestinationFolder}" />
+      </StackPanel>
+
+    </Grid>
+  </DockPanel>
 </Window>

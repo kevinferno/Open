@@ -59,12 +59,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\UserDataSaveFile.cs" />
-    <Compile Include="Model\MonitoredFolder.cs" />
+    <Compile Include="Model\Folder.cs" />
     <Compile Include="Model\UserData.cs" />
-    <Compile Include="ViewModel\MonitoredFolderViewModel.cs" />
+    <Compile Include="ViewModel\FolderViewModel.cs" />
     <Compile Include="ViewModel\OptionsViewModel.cs" />
-    <Compile Include="View\MonitoredFolderView.xaml.cs">
-      <DependentUpon>MonitoredFolderView.xaml</DependentUpon>
+    <Compile Include="View\FolderView.xaml.cs">
+      <DependentUpon>FolderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OptionsView.xaml.cs">
       <DependentUpon>OptionsView.xaml</DependentUpon>
@@ -85,7 +85,7 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\MonitoredFolderView.xaml">
+    <Page Include="View\FolderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

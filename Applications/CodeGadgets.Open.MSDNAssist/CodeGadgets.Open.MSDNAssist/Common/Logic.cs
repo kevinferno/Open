@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeGadgets.Framework.Persistence;
-using CodeGadgets.Framework.Utility;
-using CodeGadgets.Framework.Xml;
 using CodeGadgets.Open.MSDNAssist.Model;
 using CodeGadgets.Open.MSDNAssist.ViewModel;
+using CodeGadgets.Open.Framework.Threading;
 
 namespace CodeGadgets.Open.MSDNAssist
 {
@@ -49,7 +48,8 @@ namespace CodeGadgets.Open.MSDNAssist
 		private void Initiailze_Tools()
 		{
 			// AutoSave
-			Data.AutoSaveProcessor = new BackgroundMaintenanceProcessor(() => Data.UserDataSaveFile.Save(Data.UserData), MSDNAssist.AUTOSAVE_INTERVAL_MS, MSDNAssist.AUTOSAVE_INITIALDELAY_MS);
+			Data.AutoSaveProcessor = BackgroundMaintenanceProcessor.Create(() => Data.UserDataSaveFile.Save(Data.UserData), MSDNAssist.AUTOSAVE_INTERVAL_MS, MSDNAssist.AUTOSAVE_INITIALDELAY_MS); ;
+			Data.AutoSaveProcessor.Start();
 		}
 		#endregion
 		#region Termination
@@ -114,6 +114,15 @@ namespace CodeGadgets.Open.MSDNAssist
 			if (!Data.UserData.MonitoredFolders.Contains(data)) return;
 			Data.UserData.MonitoredFolders.Remove(data);
 			vm.UpdateMonitoredFolders?.Invoke();
+		}
+		#endregion
+		#region Background Processes
+		public void BackgroundProcesses_StartAll()
+		{
+		}
+		public void BackgroundProcesses_StopAll()
+		{
+
 		}
 		#endregion
 	}

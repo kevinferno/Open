@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeGadgets.Framework.Utility;
 using CodeGadgets.Open.Framework.MVVM;
+using CodeGadgets.Open.Framework.Threading;
 using CodeGadgets.Open.MSDNAssist.Model;
 
 namespace CodeGadgets.Open.MSDNAssist
